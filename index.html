@@ -1,0 +1,694 @@
+!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Моё IT-портфолио</title>
+
+<style>
+:root {
+  --bg: #070b14;
+  --panel: #101827;
+  --text: #edf3ff;
+  --muted: #9aabc4;
+  --blue: #55aaff;
+  --cyan: #61e5ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  background: radial-gradient(circle at 80% 10%, #102747 0, transparent 32%), var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #070b14cc;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #223149;
+}
+
+nav {
+  max-width: 1100px;
+  margin: auto;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.logo span {
+  color: var(--cyan);
+}
+
+.links {
+  display: flex;
+  gap: 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.links a {
+  position: relative;
+  transition: color .22s, transform .22s;
+  display: inline-block;
+}
+
+.links a:hover {
+  color: var(--cyan);
+  transform: translateY(-3px);
+}
+
+.links a:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--cyan);
+  transition: width .25s;
+}
+
+.links a:hover:after {
+  width: 100%;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 22px;
+}
+
+.hero {
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 40px;
+  padding: 65px 0;
+}
+
+.tag {
+  display: inline-flex;
+  border: 1px solid #285078;
+  background: #102238;
+  padding: 7px 13px;
+  border-radius: 30px;
+  color: var(--cyan);
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: clamp(36px, 6vw, 66px);
+  line-height: 1.12;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+
+h1 span {
+  color: var(--blue);
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 600px;
+  font-size: 17px;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #2189ff, #45c6e8);
+  font-weight: 700;
+  color: #07111e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.btn:hover {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 12px 32px #2189ff66;
+  filter: brightness(1.12);
+}
+
+.btn:active {
+  transform: scale(.96);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid #30415b;
+}
+
+.visual {
+  border: 1px solid #25354d;
+  background: linear-gradient(145deg, #14243a, #0a101c);
+  border-radius: 26px;
+  padding: 24px;
+  box-shadow: 0 25px 70px #0006;
+  animation: float 5s ease-in-out infinite;
+}
+
+.screen {
+  border-radius: 14px;
+  background: #080d17;
+  border: 1px solid #283a54;
+  padding: 18px;
+  min-height: 270px;
+}
+
+.code {
+  font-family: Consolas, monospace;
+  color: #91b9da;
+  font-size: 14px;
+}
+
+.code .green { color: #68e0b2; }
+.code .blue { color: #74aaff; }
+.code .pink { color: #e6a3ff; }
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #17283d;
+  color: #a8d7ff;
+  border: 1px solid #253e5b;
+  transition: .2s;
+}
+
+.pill:hover {
+  transform: translateY(-3px);
+  background: #213a56;
+}
+
+section {
+  padding: 72px 0;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: linear-gradient(150deg, #111c2c, #0c1320);
+  border: 1px solid #23334b;
+  border-radius: 18px;
+  padding: 22px;
+  cursor: pointer;
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #3986ca;
+  box-shadow: 0 16px 35px #0005;
+}
+
+.card:active {
+  transform: scale(.98);
+}
+
+.icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.info {
+  border-radius: 18px;
+  padding: 24px;
+  background: #101827;
+  border: 1px solid #24344b;
+}
+
+.info p {
+  color: var(--muted);
+}
+
+.info strong {
+  color: var(--text);
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.work {
+  min-height: 250px;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid #26364c;
+  background: #0a101a;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.work img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .58;
+  transition: .4s;
+}
+
+.work:hover img {
+  transform: scale(1.09);
+  opacity: .78;
+}
+
+.work:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px #0006;
+  border-color: #4b94d2;
+}
+
+.work:active {
+  transform: scale(.98);
+}
+
+.work:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #070b14 0%, #070b1470 55%, transparent 100%);
+}
+
+.work h3,
+.work p {
+  position: relative;
+  z-index: 1;
+}
+
+.work p {
+  color: #d0dced;
+  font-size: 14px;
+}
+
+.contact {
+  background: linear-gradient(135deg, #10233a, #0d1421);
+  border: 1px solid #263a53;
+  border-radius: 22px;
+  padding: 30px;
+}
+
+footer {
+  text-align: center;
+  color: #73849d;
+  padding: 30px;
+  border-top: 1px solid #1d2a3d;
+  margin-top: 40px;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media(max-width:760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 48px 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about,
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .links {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .section-title {
+    font-size: 27px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+<a class="logo" href="#">MY<span>IT</span>PORTFOLIO</a>
+
+<div class="links">
+<a href="#about">Обо мне</a>
+<a href="#skills">Навыки</a>
+<a href="#works">Работы</a>
+<a href="#contact">Контакты</a>
+</div>
+</nav>
+</header>
+
+<main>
+
+<section class="hero">
+
+<div>
+<div class="tag">💻 Компьютерная техника и IT</div>
+
+<h1>Привет! Я начинающий <span>IT-специалист</span></h1>
+
+<p class="lead">
+Меня зовут [ТВОЁ ИМЯ]. Я изучаю компьютерную технику,
+работаю с программами Microsoft Office и занимаюсь обслуживанием компьютеров.
+</p>
+
+<div class="btns">
+<a class="btn" href="#skills">Мои навыки</a>
+<a class="btn secondary" href="#about">Подробнее обо мне</a>
+</div>
+</div>
+
+<div class="visual">
+
+<div class="screen">
+<div class="code">
+
+<span class="green">// Мой профиль</span><br><br>
+
+<span class="pink">Специальность:</span><br>
+<span class="blue">Вычислительная техника</span><br>
+<span class="blue">и информационные сети</span><br><br>
+
+<span class="green">Статус:</span> Учусь и развиваюсь<br>
+<span class="green">Интересы:</span> ПК • Windows • Office<br>
+<span class="green">Цель:</span> Развиваться в IT
+
+</div>
+</div>
+
+<div class="pills">
+<span class="pill">PC Hardware</span>
+<span class="pill">Windows</span>
+<span class="pill">Microsoft Office</span>
+</div>
+
+</div>
+</section>
+
+<section id="about">
+
+<h2 class="section-title">Обо мне</h2>
+<p class="section-sub">Коротко о моей учёбе и деятельности</p>
+
+<div class="about">
+
+<div class="info">
+<h3>🎓 Моя специальность</h3>
+<p>
+Я обучаюсь по специальности
+<strong>«Вычислительная техника и информационные сети (по видам)»</strong>.
+Моя деятельность связана с компьютерами, их устройством,
+программами и обслуживанием.
+</p>
+</div>
+
+<div class="info">
+<h3>🛠️ Чем занимаюсь</h3>
+<p>
+Собираю и разбираю системные блоки, устанавливаю Windows
+с загрузочной флешки, работаю с документами и таблицами,
+а также учусь создавать презентации.
+</p>
+</div>
+
+</div>
+</section>
+
+<section id="skills">
+
+<h2 class="section-title">Мои навыки</h2>
+<p class="section-sub">Инструменты и задачи, с которыми я работаю</p>
+
+<div class="grid">
+
+<div class="card">
+<div class="icon">🖥️</div>
+<h3>Сборка и разборка ПК</h3>
+<p>Работа с комплектующими системного блока, разборка и сборка компьютера.</p>
+</div>
+
+<div class="card">
+<div class="icon">💿</div>
+<h3>Установка Windows</h3>
+<p>Установка операционной системы с помощью загрузочной USB-флешки.</p>
+</div>
+
+<div class="card">
+<div class="icon">📝</div>
+<h3>Microsoft Word</h3>
+<p>Создание, оформление и редактирование текстовых документов.</p>
+</div>
+
+<div class="card">
+<div class="icon">📊</div>
+<h3>Microsoft Excel</h3>
+<p>Создание таблиц, заполнение данных и базовая работа с электронными таблицами.</p>
+</div>
+
+<div class="card">
+<div class="icon">📽️</div>
+<h3>Microsoft PowerPoint</h3>
+<p>Начинаю создавать слайды, оформлять презентации и подбирать изображения по теме.</p>
+</div>
+
+<div class="card">
+<div class="icon">🔎</div>
+<h3>Поиск материалов</h3>
+<p>Подбираю и скачиваю изображения и материалы из интернета для учебных проектов и презентаций.</p>
+</div>
+
+</div>
+</section>
+
+<section id="works">
+
+<h2 class="section-title">Мои работы</h2>
+<p class="section-sub">Здесь можно разместить примеры выполненных заданий</p>
+
+<div class="work-grid">
+
+<div class="work">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85" alt="Компьютерные компоненты">
+<div>
+<h3>🧰 Работа с компьютером</h3>
+<p>Сборка, разборка и изучение комплектующих ПК.</p>
+</div>
+</div>
+
+<div class="work">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1000&q=85" alt="Компьютер">
+<div>
+<h3>💻 Установка Windows</h3>
+<p>Установка и настройка операционной системы.</p>
+</div>
+</div>
+
+<div class="work">
+<img src="https://images.unsplash.com/photo-1455390582262-044cdele277a?auto=format&fit=crop&w=1000&q=85" alt="Рабочее место">
+<div>
+<h3>📄 Документы Word</h3>
+<p>Текстовые документы и их оформление.</p>
+</div>
+</div>
+
+<div class="work">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=85" alt="Ноутбук">
+<div>
+<h3>📈 Таблицы Excel и слайды</h3>
+<p>Работа с таблицами и создание первых презентаций.</p>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="contact">
+
+<div class="contact">
+<h2 class="section-title">Связаться со мной</h2>
+<p class="section-sub">
+Это моё учебное портфолио. Здесь можно добавить ссылки на соцсети или электронную почту.
+</p>
+
+<div class="btns">
+<a class="btn secondary" href="mailto:example@email.com">Написать на почту</a>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+© 2026 • Моё IT-портфолио • Создано с интересом к компьютерной технике
+<br><br>
+<button class="btn secondary" id="topBtn" type="button">↑ Наверх</button>
+</footer>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Анимация появления блоков при прокрутке
+  const revealItems = document.querySelectorAll('section, .card, .info, .work, .contact');
+
+  revealItems.forEach((el, i) => {
+    el.classList.add('reveal-on-scroll');
+    el.style.transitionDelay = (i % 4) * 70 + 'ms';
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+
+  revealItems.forEach(el => observer.observe(el));
+
+  // Анимация карточек при нажатии
+  document.querySelectorAll('.card, .work').forEach(el => {
+    el.addEventListener('click', () => {
+      el.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(.97)'},
+        {transform: 'scale(1)'}
+      ], {duration: 220, easing: 'ease-out'});
+    });
+  });
+
+  // Кнопка наверх
+  const topBtn = document.getElementById('topBtn');
+
+  if (topBtn) {
+    topBtn.addEventListener('click', () => {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  }
+
+  // Движение блока при наведении мыши
+  const visual = document.querySelector('.visual');
+
+  if (visual && window.matchMedia('(pointer:fine)').matches) {
+    visual.addEventListener('mousemove', e => {
+      const r = visual.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+
+      visual.style.transform =
+        `translateY(-5px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
+    });
+
+    visual.addEventListener('mouseleave', () => {
+      visual.style.transform = '';
+    });
+  }
+
+});
+
+</script>
+
+</body>
+</html>
